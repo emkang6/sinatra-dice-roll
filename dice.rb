@@ -11,7 +11,7 @@ BetterErrors::Middleware.allow_ip!('0.0.0.0/0.0.0.0')
 
 
 get("/") do
-  erb(:elephant, { :layout => :wrapper})
+  erb(:elephant)
 end
 
 get("/zebra") do
@@ -24,43 +24,59 @@ end
 
 
 get ("/dice/2/6") do
-  first_die = rand(1..6)
-  second_die = rand(1..6)
-  sum = first_die + second_die
+  @rolls = []
 
-  @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
-
-  erb(:two_six, { :layout => :wrapper})
+  2.times do
+    die = rand(1..6)
+  
+    @rolls.push(die)
+  end
+  erb(:two_six)
 end
 
 
 get ("/dice/2/10") do
-  first_die = rand(1..10)
-  second_die = rand(1..10)
-  sum = first_die + second_die
+  @rolls = []
 
-  @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
+  2.times do
+    die = rand(1..10)
 
-  erb(:two_ten, { :layout => :wrapper})
+    @rolls.push(die)
+
+  end
+  erb(:two_ten)
 end
 
 get ("/dice/1/20") do
-  @first_die = rand(1..20)
+  @rolls = []
 
-  @outcome = "You rolled a #{@first_die}."
+  1.times do
+    die = rand(1..20)
 
-  erb(:one_twenty, { :layout => :wrapper})
+    @rolls.push(die)
+  end
+  erb(:one_twenty)
 end
 
 get ("/dice/5/4") do
-  first_die = rand(1..4)
-  second_die = rand(1..4)
-  third_die = rand(1..4)
-  fourth_die = rand(1..4)
-  fifth_die = rand(1..4)
-  sum = first_die + second_die + third_die + fourth_die + fifth_die
+  @rolls = []
 
-  @outcome = "You rolled a #{first_die}, #{second_die}, #{third_die}, #{fourth_die}, and a #{fifth_die} for a total of #{sum}."
+  5.times do
+    die = rand(1..4)
 
-  erb(:five_four, { :layout => :wrapper})
+    @rolls.push(die)
+  end
+  erb(:five_four)
+end
+
+  get("/dice/100/6") do
+    @rolls = []
+
+    100.times do
+      die = rand(1..6)
+
+      @rolls.push(die)
+
+    end
+    erb(:one_hundred_six)
 end
